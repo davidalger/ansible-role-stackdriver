@@ -69,6 +69,14 @@ stackdriver_elasticsearch_enabled: no
 stackdriver_elasticsearch_url: http://localhost:9200/_nodes/_local/stats/
 ```
 
+### kafka
+
+```
+stackdriver_kafka_enabled: no
+stackdriver_kafka_host: localhost
+stackdriver_kafka_port: 9092
+```
+
 ### memcached
 
 ```
@@ -209,6 +217,14 @@ stackdriver_redis_port: 6379
 stackdriver_redis_password: ""
 
 stackdriver_redis_timeout: 2000     # Seconds
+```
+
+### zookeeper
+
+```
+stackdriver_zookeeper_enabled: no
+stackdriver_zookeeper_host: localhost
+stackdriver_zookeeper_port: 2181
 ```
 
 ### Other variables
