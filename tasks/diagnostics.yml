@@ -13,17 +13,17 @@
 # limitations under the License.
 ---
 - name: Test Apache status page.
-  check_uri:
+  uri:
     url: "{{ stackdriver_apache_status_url }}"
     user: "{{ stackdriver_apache_username }}"
     password: "{{ stackdriver_apache_password }}"
   when: stackdriver_apache_enabled
 
 - name: Test elasticsearch stats URL.
-  check_uri:
+  uri:
     url: "{{ stackdriver_elasticsearch_url }}"
   when: stackdriver_elasticsearch_enabled
-  
+
 - name: Test jvm connectivity.
   wait_for:
     host: "{{ stackdriver_jvm_host }}"
@@ -73,7 +73,7 @@
   when: stackdriver_mysql_enabled
 
 - name: Test nginx status page.
-  check_uri:
+  uri:
     url: "{{ stackdriver_nginx_status_url }}"
     user: "{{ stackdriver_nginx_username }}"
     password: "{{ stackdriver_nginx_password }}"
@@ -97,7 +97,7 @@
       PGPASSWORD: "{{ stackdriver_postgresql_password }}"
 
 - name: Test RabbitMQ API.
-  check_uri:
+  uri:
     url: "{{ stackdriver_rabbitmq_url }}/"  # List queues.
     user: "{{ stackdriver_rabbitmq_username }}"
     password: "{{ stackdriver_rabbitmq_password }}"
