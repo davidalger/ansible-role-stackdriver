@@ -141,3 +141,4 @@ stackdriver_zookeeper_port: 2181
 stackdriver_remove_unmanaged: no
 stackdriver_logfile_enabled: no
 stackdriver_events_enabled: no
+stackdriver_diagnostics_enabled: yes

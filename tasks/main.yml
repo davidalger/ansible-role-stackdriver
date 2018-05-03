@@ -40,4 +40,4 @@
 
 - include_tasks: diagnostics.yml
   become: no
-  when: ansible_os_family != "Windows"
+  when: stackdriver_diagnostics_enabled and ansible_os_family != "Windows"
