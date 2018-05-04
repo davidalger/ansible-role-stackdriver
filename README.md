@@ -142,7 +142,7 @@ stackdriver_nginx_password: ""
 When connceting to PostgreSQL the plugin will connect using a local Unix
 socket. To connect via TCP/IP, specify a host name of `127.0.0.1`. The
 default port is 5432. If a port is provided without a host name, the
-pluggin will use Unix domain socket to connect to the database. The port 
+pluggin will use Unix domain socket to connect to the database. The port
 is incorporated into the path: `/var/run/postgresql/.s.PGSQL.5432`.
 
 You need to provide the user name and password of the user who will run
@@ -252,6 +252,13 @@ work on Google Cloud Platform.
 
 ```
 stackdriver_events_enabled: no
+```
+
+Setting the following variable to `no` will disable Ansible diagnostics
+while running playbook.
+
+```
+stackdriver_diagnostics_enabled: yes
 ```
 
 Example Playbook
