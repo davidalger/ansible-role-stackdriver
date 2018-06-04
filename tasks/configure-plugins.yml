@@ -21,7 +21,7 @@
     dest: "{{ stackdriver_collectd_config_dir }}/{{ item }}.conf"
     validate: "{{ stackdriver_collectd_binary }} -tC %s"
   with_items: '{{ stackdriver_enabled_plugins }}'
-  when: item not in ["", "jvm"]
+  when: item not in ["", "jvm", "kafka"]
   notify:
     - restart collectd
     - stackdriver updated
@@ -29,7 +29,7 @@
 - name: Find libjvm directory to create jvm plugin context
   shell: "dirname $(find $(dirname $(readlink -f $(which java)))/.. -name libjvm.so)"
   changed_when: False
-  when: stackdriver_jvm_enabled
+  when: stackdriver_jvm_enabled or stackdriver_kafka_enabled
   register: stackdriver_libjvm_location
 
 - name: Render the jvm configuration from template.
@@ -38,6 +38,18 @@
     dest: "{{ stackdriver_collectd_config_dir }}/jvm.conf"
     validate: "{{ stackdriver_collectd_binary }} -tC %s"
   when: stackdriver_jvm_enabled
+  environment:
+    LD_LIBRARY_PATH: "$LD_LIBRARY_PATH:{{ stackdriver_libjvm_location.stdout }}"
+  notify:
+    - restart collectd
+    - stackdriver updated
+
+- name: Render the Kafka configuration from template.
+  template:
+    src: "kafka.conf"
+    dest: "{{ stackdriver_collectd_config_dir }}/kafka.conf"
+    validate: "{{ stackdriver_collectd_binary }} -tC %s"
+  when: stackdriver_kafka_enabled
   environment:
     LD_LIBRARY_PATH: "$LD_LIBRARY_PATH:{{ stackdriver_libjvm_location.stdout }}"
   notify:
