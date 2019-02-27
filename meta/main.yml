@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: stackdriver
   author: Ken Rimey
   description: Install the Stackdriver agent and configure its plugins.
   company: Google
