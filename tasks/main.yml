@@ -38,6 +38,5 @@
 
 # Post-everything diagnostics
 
-- include_tasks: diagnostics.yml
-  become: no
+- include_tasks: diagnostics.yml  
   when: stackdriver_diagnostics_enabled and ansible_os_family != "Windows"
