@@ -14,10 +14,15 @@
 ---
 - name: "[RedHat] Install the Python bindings for SELinux, for Ansible."
   yum: name=libselinux-python state=present
+  when: ansible_distribution_major_version == "7"
+
+- name: "[RedHat] Install the Python bindings for SELinux, for Ansible."
+  yum: name=python3-libselinux state=present
+  when: ansible_distribution_major_version != "7"
 
 - name: "[RedHat] Add the Stackdriver yum repository."
-  get_url:
-    url: "{{ stackdriver_package_repo }}"
+  template:
+    src: "{{ stackdriver_package_repo }}"
     dest: /etc/yum.repos.d/stackdriver.repo
 
 - name: "[RedHat] Install the Stackdriver agent."
